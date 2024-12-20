@@ -36,12 +36,23 @@ namespace ApiTestBetssonConstans
         /// EmptyJson
         /// </summary>
         public static object EmptyBody => "";
-
+ 
         // Error message
 
         /// <summary>
         /// EmptyJson
         /// </summary>
-        public static object EmptyBodyErrorMessage => "A non-empty request body is required.";
+        public static string EmptyBodyErrorMessage => "A non-empty request body is required.";
+        /// <summary>
+        /// EmptyJson
+        /// </summary>
+        public static string InvalidWithdrawErrorMessage => "Invalid withdrawal amount. There are insufficient funds.";
+        /// <summary>
+        /// EmptyJson
+        /// </summary>
+        public static string InvalidStringErrorMessage => "The JSON value could not be converted to System.Decimal.";
+
+
+
     }
 }

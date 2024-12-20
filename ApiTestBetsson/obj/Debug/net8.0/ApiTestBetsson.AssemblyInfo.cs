@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiTestBetsson")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9ae77fc3ab843a58d66ccfc2d8d34ecf75b1dd0b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2d5c46c8c2eefa0f3ff4953979aeb69fa7528dd")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiTestBetsson")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiTestBetsson")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
