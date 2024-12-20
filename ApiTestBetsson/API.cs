@@ -2,15 +2,46 @@ using System.Net;
 using RestSharp;
 using Xunit;
 using ApiTestBetssonConstans;
+using System.Text.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ApiTests
 {
-    public class ApiTestsBetsson
+    public class ApiTestsBetsson : IDisposable
     {
+        private readonly RestClient _client;
+
+        public ApiTestsBetsson()
+        {
+            _client = new RestClient(BetssonConstans.URL);
+         
+            Task.Run(async () => await ResetWallet()).GetAwaiter().GetResult();
+        }
+
+        private async Task ResetWallet()
+        {
+            var balanceRequest = new RestRequest(BetssonConstans.Balance, Method.Get);
+            var balanceResponse = await _client.ExecuteAsync(balanceRequest);
+            var jsonObject = JObject.Parse(balanceResponse.Content);
+            var withdrawAmount = (double)jsonObject["amount"];
+
+            if (withdrawAmount > 0)
+            {
+                var withdrawRequest = new RestRequest(BetssonConstans.Withdraw, Method.Post);
+                withdrawRequest.AddJsonBody(new { amount = withdrawAmount });
+                var withdrawResponse = await _client.ExecuteAsync(withdrawRequest);
+            }
+        }
+
+        public void Dispose()
+        {           
+            _client.Dispose();
+        }
 
         #region GET
+
         [Fact]
-        public async void BalanceGetRequest_ReturnOk()
+        public async Task BalanceGet_StatusOk()
         {
             // Arrange
             var client = new RestClient(BetssonConstans.URL);
@@ -26,7 +57,128 @@ namespace ApiTests
         }
         #endregion
 
-        #region POS
+        #region POST
+
+        #region Deposit
+        [Fact]
+        public async Task DepositPost_StatusOk()
+        {
+            // Arrange
+            var AddedAmount = 100;
+            var client = new RestClient(BetssonConstans.URL);
+            var request = new RestRequest(BetssonConstans.Deposit, Method.Post);
+            request.AddJsonBody(new { amount = AddedAmount });
+
+            // Act
+            var response = await client.ExecuteAsync(request);
+            var jsonObject = JObject.Parse(response.Content);
+            var amount = (int)jsonObject["amount"];
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.NotNull(response.Content);
+            Assert.NotEmpty(response.Content);
+            Assert.Equal(AddedAmount, amount);
+        }
+
+        [Fact]
+        public async Task DepositPost_LargeNumber_StatusBadRequest()
+        {
+            // Arrange
+            double AddedAmount = 1000000000000000000000000000000.0;
+            var client = new RestClient(BetssonConstans.URL);
+            var request = new RestRequest(BetssonConstans.Deposit, Method.Post);
+            request.AddJsonBody(new { amount = AddedAmount });
+
+            // Act
+            var response = await client.ExecuteAsync(request);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task DepositPost_NegativeNumber_StatusBadRequest()
+        {
+            // Arrange
+            var AddedAmount = -500;
+            var client = new RestClient(BetssonConstans.URL);
+            var request = new RestRequest(BetssonConstans.Deposit, Method.Post);
+            request.AddJsonBody(new { amount = AddedAmount });
+
+            // Act
+            var response = await client.ExecuteAsync(request);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task DepositPost_String_StatusBadRequest()
+        {
+            // Arrange
+            var AddedAmount = "AppleTree";
+            var client = new RestClient(BetssonConstans.URL);
+            var request = new RestRequest(BetssonConstans.Deposit, Method.Post);
+            request.AddJsonBody(new { amount = AddedAmount });
+
+            // Act
+            var response = await client.ExecuteAsync(request);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task DepositPost_NullValue_StatusBadRequest()
+        {
+            // Arrange
+            var AddedAmount = BetssonConstans.Value;
+            var client = new RestClient(BetssonConstans.URL);
+            var request = new RestRequest(BetssonConstans.Deposit, Method.Post);
+            request.AddJsonBody(new { amount = AddedAmount });
+
+            // Act
+            var response = await client.ExecuteAsync(request);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task DepositPost_EmptyJsonBody_StatusBadRequest()
+        {
+            // Arrange
+            var client = new RestClient(BetssonConstans.URL);
+            var request = new RestRequest(BetssonConstans.Deposit, Method.Post);
+            request.AddJsonBody(BetssonConstans.EmptyJsonBody);
+
+            // Act
+            var response = await client.ExecuteAsync(request);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task DepositPost_EmptyJson_StatusBadRequest()
+        {
+            // Arrange
+            var client = new RestClient(BetssonConstans.URL);
+            var request = new RestRequest(BetssonConstans.Deposit, Method.Post);
+            request.AddJsonBody(BetssonConstans.EmptyBody);
+
+            // Act
+            var response = await client.ExecuteAsync(request);
+            var jsonObject = JObject.Parse(response.Content);
+            var errors = jsonObject["errors"];
+            string errorMessage = errors[""]?[0]?.ToString();
+            // Assert
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.Equal(errorMessage, BetssonConstans.EmptyBodyErrorMessage);
+        }
+        #endregion
+
 
         #endregion
     }

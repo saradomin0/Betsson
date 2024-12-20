@@ -98,3 +98,4 @@ E:\Project\API\ApiTestBetsson\ApiTestBetsson\obj\Debug\net8.0\refint\ApiTestBets
 E:\Project\API\ApiTestBetsson\ApiTestBetsson\obj\Debug\net8.0\ApiTestBetsson.pdb
 E:\Project\API\ApiTestBetsson\ApiTestBetsson\obj\Debug\net8.0\ApiTestBetsson.genruntimeconfig.cache
 E:\Project\API\ApiTestBetsson\ApiTestBetsson\obj\Debug\net8.0\ref\ApiTestBetsson.dll
+E:\Project\API\ApiTestBetsson\ApiTestBetsson\obj\Debug\net8.0\ApiTestBetsson.sourcelink.json

@@ -12,7 +12,6 @@ namespace ApiTestBetssonConstans
         /// URL for RestClient
         /// </summary>
         public static string URL => "http://localhost:8080";
-
         /// <summary>
         /// RestRequest for Balance
         /// </summary>
@@ -25,5 +24,24 @@ namespace ApiTestBetssonConstans
         /// RestRequest for Withdraw
         /// </summary>
         public static string Withdraw => "/onlinewallet/withdraw";
+        /// <summary>
+        /// Null value for amount
+        /// </summary>
+        public static string Value => null;
+        /// <summary>
+        /// EmptyJsonBody
+        /// </summary>
+        public static object EmptyJsonBody => new { };
+        /// <summary>
+        /// EmptyJson
+        /// </summary>
+        public static object EmptyBody => "";
+
+        // Error message
+
+        /// <summary>
+        /// EmptyJson
+        /// </summary>
+        public static object EmptyBodyErrorMessage => "A non-empty request body is required.";
     }
 }
