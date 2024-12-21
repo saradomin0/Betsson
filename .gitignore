@@ -1,0 +1,16 @@
+﻿.vs
+ApiTestBetsson/bin
+ApiTestBetsson/obj
+Betsson.OnlineWallets/bin
+Betsson.OnlineWallets.Data/bin
+Betsson.OnlineWallets.Web/bin
+qa-backend-code-challenge/src/Betsson.OnlineWallets/obj
+UnitTestBetsson/bin
+UnitTestBetsson/obj
+Betsson.OnlineWallets/obj
+Betsson.OnlineWallets.Data/obj
+Betsson.OnlineWallets.Web/obj
+Betsson.OnlineWallets.ApiTest/bin
+Betsson.OnlineWallets.ApiTest/obj
+Betsson.OnlineWallets.UnitTest/bin
+Betsson.OnlineWallets.UnitTest/obj

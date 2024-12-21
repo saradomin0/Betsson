@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Betsson.OnlineWallets.ApiTest", "Betsson.OnlineWallets.ApiTest\Betsson.OnlineWallets.ApiTest.csproj", "{A2F39224-967F-4430-A1AE-7FF7BF3D36C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Betsson.OnlineWallets.UnitTest", "Betsson.OnlineWallets.UnitTest\Betsson.OnlineWallets.UnitTest.csproj", "{B90276B0-3799-47DE-8179-241157A9ED36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Betsson.OnlineWallets.Web", "Betsson.OnlineWallets.Web\Betsson.OnlineWallets.Web.csproj", "{96409587-30A2-4BA0-954D-8F41CC7D70CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Betsson.OnlineWallets.Data", "Betsson.OnlineWallets.Data\Betsson.OnlineWallets.Data.csproj", "{E3F6CB64-019A-49FC-B0B2-15439A59ED53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Betsson.OnlineWallets", "Betsson.OnlineWallets\Betsson.OnlineWallets.csproj", "{D7CE66F5-2A69-418A-AE00-CA639D18D170}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2F39224-967F-4430-A1AE-7FF7BF3D36C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2F39224-967F-4430-A1AE-7FF7BF3D36C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2F39224-967F-4430-A1AE-7FF7BF3D36C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2F39224-967F-4430-A1AE-7FF7BF3D36C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B90276B0-3799-47DE-8179-241157A9ED36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B90276B0-3799-47DE-8179-241157A9ED36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B90276B0-3799-47DE-8179-241157A9ED36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B90276B0-3799-47DE-8179-241157A9ED36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96409587-30A2-4BA0-954D-8F41CC7D70CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96409587-30A2-4BA0-954D-8F41CC7D70CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96409587-30A2-4BA0-954D-8F41CC7D70CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96409587-30A2-4BA0-954D-8F41CC7D70CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3F6CB64-019A-49FC-B0B2-15439A59ED53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3F6CB64-019A-49FC-B0B2-15439A59ED53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3F6CB64-019A-49FC-B0B2-15439A59ED53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3F6CB64-019A-49FC-B0B2-15439A59ED53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7CE66F5-2A69-418A-AE00-CA639D18D170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7CE66F5-2A69-418A-AE00-CA639D18D170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7CE66F5-2A69-418A-AE00-CA639D18D170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7CE66F5-2A69-418A-AE00-CA639D18D170}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
