@@ -4,11 +4,11 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /sln
-COPY ["src/Betsson.OnlineWallets.Web/Betsson.OnlineWallets.Web.csproj", "sln/Betsson.OnlineWallets.Web/"]
+COPY ["Betsson.OnlineWallets.Web/Betsson.OnlineWallets.Web.csproj", "sln/Betsson.OnlineWallets.Web/"]
 
 RUN dotnet restore "sln/Betsson.OnlineWallets.Web/Betsson.OnlineWallets.Web.csproj"
 COPY . .
-WORKDIR "/sln/src/Betsson.OnlineWallets.Web"
+WORKDIR "/sln/Betsson.OnlineWallets.Web"
 RUN dotnet build "Betsson.OnlineWallets.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish

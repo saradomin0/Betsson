@@ -1,11 +1,7 @@
-using System.Net;
-using RestSharp;
-using Xunit;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using Xunit.Sdk;
-using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Linq;
+using RestSharp;
+using System.Net;
 
 namespace Betsson.OnlineWallets.ApiTest
 {
@@ -95,9 +91,13 @@ namespace Betsson.OnlineWallets.ApiTest
 
             // Act
             var response = await client.ExecuteAsync(request);
+            var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(response.Content);
+            var messages = errorResponse.Errors["$.amount"];
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.Contains(OnlineWalletsConstans.InvalidStringErrorMessage, messages[0]);
+
         }
 
         [Fact]
@@ -111,9 +111,12 @@ namespace Betsson.OnlineWallets.ApiTest
 
             // Act
             var response = await client.ExecuteAsync(request);
+            var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(response.Content);
+            var messages = errorResponse.Errors["Amount"][0];
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.Contains(OnlineWalletsConstans.NegativeDepositErrorMessage, messages);
         }
 
         [Fact]
@@ -193,7 +196,7 @@ namespace Betsson.OnlineWallets.ApiTest
         #region Withdraw
 
         [Fact]
-        public async Task WithdrawPost_StatusOk()
+        public async Task WithdrawPost_Integer_StatusOk()
         {
             // Arrange
             var DepositAmount = 100;
@@ -274,11 +277,11 @@ namespace Betsson.OnlineWallets.ApiTest
         }
 
         [Fact]
-        public async Task WithdrawPost_StringWithdrawa_StatusOk()
+        public async Task WithdrawPost_StringWithdraw_StatusOk()
         {
             // Arrange
             var DepositAmount = 100;
-            var WithdrawAmount = "asdfasd";
+            var WithdrawAmount = "AppleTree";
             var client = new RestClient(OnlineWalletsConstans.URL);
             // request to Deposit
             var request1 = new RestRequest(OnlineWalletsConstans.Deposit, Method.Post);
@@ -290,13 +293,12 @@ namespace Betsson.OnlineWallets.ApiTest
             // Act
             var response1 = await client.ExecuteAsync(request1);
             var response2 = await client.ExecuteAsync(request2);
-            var jsonObject = JObject.Parse(response2.Content);
-            var errors = jsonObject["errors"];
-            string errorMessage = errors["$.amount"].ToString();
+            var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(response2.Content);
+            var messages = errorResponse.Errors["$.amount"][0];
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response2.StatusCode);
-            Assert.Contains(errorMessage, OnlineWalletsConstans.InvalidStringErrorMessage);
+            Assert.Contains(OnlineWalletsConstans.InvalidStringErrorMessage,messages);
         }
 
         [Fact]
@@ -309,12 +311,12 @@ namespace Betsson.OnlineWallets.ApiTest
 
             // Act
             var response = await client.ExecuteAsync(request);
-            var jsonObject = JObject.Parse(response.Content);
-            var errors = jsonObject["errors"];
-            string errorMessage = errors[""]?[0]?.ToString();
+            var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(response.Content);
+            var messages = errorResponse.Errors[""][0];
+
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.Equal(errorMessage, OnlineWalletsConstans.EmptyBodyErrorMessage);
+            Assert.Equal(messages, OnlineWalletsConstans.EmptyBodyErrorMessage);
         }
 
         [Fact]
@@ -344,16 +346,11 @@ namespace Betsson.OnlineWallets.ApiTest
             // Act
             var response = await client.ExecuteAsync(request);
             var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(response.Content);
-            var message = errorResponse.Errors["$.amount"][0];
-            /*
-            var response = await client.ExecuteAsync(request);
-            var jsonObject = JObject.Parse(response.Content);
-            var errors = jsonObject["errors"];
-            string errorMessage = errors["$.amount"].ToString();
-            */
+            var messages = errorResponse.Errors["$.amount"];
+
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.Contains(OnlineWalletsConstans.InvalidStringErrorMessage, message);
+            Assert.Contains(OnlineWalletsConstans.InvalidStringErrorMessage, messages[0]);
         }
         #endregion
         #endregion

@@ -52,6 +52,12 @@ namespace Betsson.OnlineWallets.ApiTest
         /// EmptyJson
         /// </summary>
         public static string InvalidStringErrorMessage => "The JSON value could not be converted to System.Decimal.";
+        /// <summary>
+        /// NegativeDeposit
+        /// </summary>
+        public static string NegativeDepositErrorMessage => "'Amount' must be greater than or equal to '0'.";
+
+
 
 
 
