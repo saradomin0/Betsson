@@ -136,7 +136,7 @@ namespace Betsson.OnlineWallets.ApiTest
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.Contains(errorMessage, OnlineWalletsConstans.InvalidStringErrorMessage);
+            Assert.Contains(OnlineWalletsConstans.InvalidStringErrorMessage, errorMessage);
         }
 
         [Fact]
@@ -156,7 +156,7 @@ namespace Betsson.OnlineWallets.ApiTest
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.Contains(errorMessage, OnlineWalletsConstans.InvalidStringErrorMessage);
+            Assert.Contains(OnlineWalletsConstans.InvalidStringErrorMessage,errorMessage);
         }
 
         [Fact]
@@ -187,6 +187,7 @@ namespace Betsson.OnlineWallets.ApiTest
             var jsonObject = JObject.Parse(response.Content);
             var errors = jsonObject["errors"];
             string errorMessage = errors[""]?[0]?.ToString();
+
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
             Assert.Equal(errorMessage, OnlineWalletsConstans.EmptyBodyErrorMessage);
